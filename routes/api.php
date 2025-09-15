@@ -7,7 +7,8 @@ use App\Http\Controllers\DataModalController;
 use App\Http\Controllers\DataSahamController;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\PERDAController;
-
+use App\Http\Controllers\InternalController;
+use App\Http\Controllers\ExternalController;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -66,3 +67,12 @@ Route::put('/perda/row/{index}', [PERDAController::class, 'updateRow']);   // up
 Route::delete('/perda/row/{index}', [PERDAController::class, 'deleteRow']); // delete row
 Route::post('/perda/row', [PERDAController::class, 'addRow']);             // add row baru
 Route::get('/perda/export', [PERDAController::class, 'export']);
+
+// routes/api.php
+Route::get('/internals', [InternalController::class, 'index']);
+Route::post('/internals', [InternalController::class, 'store']);
+Route::delete('/internals/{id}', [InternalController::class, 'destroy']);
+
+Route::get('/externals', [ExternalController::class, 'index']);
+Route::post('/externals', [ExternalController::class, 'store']);
+Route::delete('/externals/{id}', [ExternalController::class, 'destroy']);

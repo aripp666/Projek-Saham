@@ -6,6 +6,8 @@ use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\DetailModalController;
+use App\Http\Controllers\InternalController;
+use App\Http\Controllers\ExternalController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -55,6 +57,24 @@ Route::get('/Pdf', function () {
     return Inertia::render('PdfUpload'); // Pdf.jsx ada di resources/js/Pages/Pdf.jsx
 });
 
+Route::get('/rencana-setoran', function () {
+    return Inertia::render('RencanaSetoran'); // RencanaSetoran.jsx ada di resources/js/Pages/RencanaSetoran.jsx
+})->name('rencana.setoran');
+
+Route::get('/external', function () {
+    return Inertia::render('External'); // External.jsx ada di resources/js/Pages/External.jsx
+})->name('external');
+
+Route::get('/internal', function () {
+    return Inertia::render('Internal'); // Internal.jsx ada di resources/js/Pages/Internal.jsx
+})->name('internal');
+
+Route::get('/internal/{id}', function ($id) {
+    return Inertia::render('InternalDetail', ['id' => $id]);
+});
+
+Route::get('/internals/{id}', [InternalController::class, 'show'])->name('internals.show');
+Route::get('/externals/{id}', [ExternalController::class, 'show'])->name('externals.show');
 
 // Route::get('/', function () {
 //     return Inertia::render('Welcome', [
